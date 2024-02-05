@@ -49,7 +49,7 @@ def bot():
 
         webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
     except: 
-        print('Aguardando  mensagens!')       
+        print('Aguardando as mensagens!')       
 
 while True:
     bot()
