@@ -6,6 +6,9 @@ import os
 import time
 import requests
 
+agent = {"User-Agent": 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'}
+usuario = "diego@gmail.com"
+
 dir_path = os.getcwd()
 chrome_options2 = Options()
 chrome_options2.add_argument(r"user-data-dir=" + dir_path + "/profile/login")
@@ -38,13 +41,16 @@ def bot():
         todas_msgs_txt = [e.text for e in todas_msgs]
         msg = todas_msgs_txt[-1]
         print(msg)
-        time.sleep(3)
+        time.sleep(2)
 
 
+        resposta = requests.get('http://localhost/chat_bot_wpp/index.php', params={'msg': msg, 'telefone': telefone_final, 'usuario':usuario})
+        time.sleep(1)
+        resposta = resposta.text
         campo_de_texto = driver.find_element(By.XPATH, '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p')
         campo_de_texto.click()
         time.sleep(1)
-        campo_de_texto.send_keys('Olá aqui é o bot!', Keys.ENTER)
+        campo_de_texto.send_keys(resposta, Keys.ENTER)
 
 
         webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
