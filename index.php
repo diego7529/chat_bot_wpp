@@ -8,8 +8,7 @@ $conn = mysqli_connect($servidor,$usuario,$senha,$banco);
 
 /*
 #INSERIR NO BANCO
-$sql = "INSERT INTO bot (nome,telefone) VALUES ('$nome', '$telefone')";
-
+$sql = "INSERT INTO chat_bot (nome,telefone) VALUES ('$nome', '$telefone')";
 $query = mysqli_query($conn,$sql);
 if(!$query){
     echo "erro ao inserir os dados";
@@ -20,7 +19,7 @@ else{
 
 
 #ATUALIZAR NO BANCO
-$sqlUpdate = "UPDATE bot SET nome = '$nome' WHERE id= 4";
+$sqlUpdate = "UPDATE chat_bot SET nome = '$nome' WHERE id= 4";
 $queryUpdate = mysqli_query($conn,$sqlUpdate);
 if(!$queryUpdate){
     echo "erro";
@@ -30,7 +29,7 @@ if(!$queryUpdate){
 
 
 #BUSCAR NO BANCO DE DADOS   
-$sqlSearch = "SELECT *FROM bot WHERE id > 0";
+$sqlSearch = "SELECT *FROM chat_bot WHERE id > 0";
 $querySearch = mysqli_query($conn,$sqlSearch);  
 
 while ($rows_usuarios = mysqli_fetch_array($querySearch)) {
@@ -100,5 +99,7 @@ if($status >= 4){
     
     echo $resposta;
     }
-    
-
+ 
+$data = date('d-m-y');
+$sql = "INSERT INTO historico (telefone, msg_cliente, msg_bot, data) VALUES ('$telefone', '$msg','$resposta', '$data')";
+$query = mysqli_query($conn,$sql);
